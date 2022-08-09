@@ -6,6 +6,7 @@ import { OutputChannelLogging } from "../common/OutputChannelLogging";
 import { Session } from "../common/session";
 import * as commands from '../common/commands';
 import { Action } from "../common/Action";
+import path = require("path");
 
 export class ActionsFromSavedActionIdPanel {
     public static currentPanel: ActionsFromSavedActionIdPanel | undefined;
@@ -176,12 +177,27 @@ export class ActionsFromSavedActionIdPanel {
             data.sort((a, b) => (a.executionDate > b.executionDate) ? 1 : -1);
 
             // write file
-            var fileInfo = await vscode.window.showSaveDialog();
+            var fileInfo = await vscode.window.showSaveDialog({
+                defaultUri: vscode.Uri.file('*.csv'),
+                filters: {
+                    // eslint-disable-next-line @typescript-eslint/naming-convention
+                    'CSV Files': ['csv']
+                }
+            });
+
             if (fileInfo === undefined) {
+                OutputChannelLogging.log('process cancelled by user');
                 return;
             }
             
-            const filename = fileInfo.path.substring(1);
+            var filename = fileInfo.path.substring(1);
+
+            // check for extension
+            const ext = path.extname(filename);
+            if (ext !== '.csv') {
+                filename = `${filename}.csv`;
+            }
+            
             const csvFile = fs.createWriteStream(filename);
             const stream = format({
                 headers: true
