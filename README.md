@@ -13,6 +13,8 @@ Contains commands to retrieve action results from every action created from a sa
 
 This extension allows you to retrieve results from every action generted from a saved action in Tanium.
 
+Execute command "Tanium Actions from Saved Action Ids"
+
 ![Action Results from Saved Actions](./media/actions_from_saved_actions.gif)
 ## Known Issues
 * none
