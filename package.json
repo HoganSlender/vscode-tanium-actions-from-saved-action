@@ -1,8 +1,8 @@
 {
   "name": "hoganslender-tanium-actions-from-saved-actions",
-  "displayName": "Tanium Actions from Saved Action",
+  "displayName": "Tanium Action Results from Saved Action",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "HoganSlender",
   "repository": {
     "type": "git",
