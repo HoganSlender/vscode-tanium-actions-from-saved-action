@@ -3,7 +3,7 @@ import * as fs from "fs";
 import { format } from "fast-csv";
 import { getUri } from "../common/getUri";
 import { OutputChannelLogging } from "../common/OutputChannelLogging";
-import { Session } from "../common/session";
+import { Session } from "../common/Session";
 import * as commands from '../common/commands';
 import { Action } from "../common/Action";
 import path = require("path");

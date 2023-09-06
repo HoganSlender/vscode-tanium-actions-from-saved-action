@@ -77,14 +77,27 @@ export class Action {
                             for (var r = 0; r < resultSet.rows.length; r++) {
                                 const row = resultSet.rows[r];
 
-                                const statusItems = row.data[1][0].text.split(':');
+                                const statusText = row.data[1][0].text;
+                                var result: ActionResult;
 
-                                var result: ActionResult = {
-                                    executionDate: this.formatDate(executionDate),
-                                    actionId: actionId,
-                                    status: statusItems[1].substr(0, statusItems[1].length - 1),
-                                    computerName: row.data[0][0].text
-                                };
+                                // check for result
+                                if (statusText.includes(':')) {
+                                    const statusItems = row.data[1][0].text.split(':');
+
+                                    result = {
+                                        executionDate: this.formatDate(executionDate),
+                                        actionId: actionId,
+                                        status: statusItems[1].substr(0, statusItems[1].length - 1),
+                                        computerName: row.data[0][0].text
+                                    };
+                                } else {
+                                    result = {
+                                        executionDate: this.formatDate(executionDate),
+                                        actionId: actionId,
+                                        status: statusText,
+                                        computerName: row.data[0][0].text
+                                    };
+                                }
 
                                 retval.push(result);
                             }
