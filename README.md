@@ -17,6 +17,6 @@ Execute command "Tanium Actions from Saved Action Ids"
 
 ![Action Results from Saved Actions](./media/actions_from_saved_actions.gif)
 ## Known Issues
-* none
+* Versions prior to 0.0.3 had an issue with parsing status with [results currently unavailable]
 ## Release Notes
 The extension will store the fqdn and username between calls.
