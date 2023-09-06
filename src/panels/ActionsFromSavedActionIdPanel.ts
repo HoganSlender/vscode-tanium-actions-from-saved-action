@@ -232,16 +232,20 @@ export class ActionsFromSavedActionIdPanel {
     }
 
     private writeResults(httpTimeout: number, fqdn: string, session: string, action: any, data: any[]) {
-        const p = new Promise<void>(async (resolve) => {
-            const results = await Action.getResults(httpTimeout, fqdn, session, action);
-
-            // write out actions to results
-            OutputChannelLogging.log(`found ${results.length} results for action ${action.id}`);
-            for (var r = 0; r < results.length; r++) {
-                data.push(results[r]);
+        const p = new Promise<void>(async (resolve, reject) => {
+            try {
+                const results = await Action.getResults(httpTimeout, fqdn, session, action);
+    
+                // write out actions to results
+                OutputChannelLogging.log(`found ${results.length} results for action ${action.id}`);
+                for (var r = 0; r < results.length; r++) {
+                    data.push(results[r]);
+                }
+    
+                return resolve();
+            } catch (err) {
+                return reject();
             }
-
-            return resolve();
         });
 
         return p;
